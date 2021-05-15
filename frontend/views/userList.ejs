@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <style>
+        body { background-color: #7cf7c0;}
+    </style>
+
+</head>
+<body style="background: #b5c7db">
+
+<!--Navbar start -->
+<nav class="navbar navbar-light" style="background-color: #22293182">
+    <span class="navbar-brand h1 " style="color: aliceblue;">Service Management System</span>
+    <div align="right">
+        <!--Button start -->
+        <a href="/adminHome.html" class="btn btn-success" role="button" aria-pressed="true"
+           style=" background:rgba(34, 41, 49, 0.51)">Go Back</a>
+        <a href="/logout" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
+        <!--Button end -->
+    </div>
+</nav>
+<!--Navbar end-->
+
+<div class="container">
+    <div align="center">
+        <h2><%= title %></h2>
+    </div>
+    <table class="table table-striped">
+
+
+        <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>User Id</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% employees.forEach(function(employee){ %>
+            <tr>
+                <td><%=employee.employee_id %></td>
+                <td><%=employee.employeeName %></td>
+                <td><%=employee.userId %></td>
+                <td><%=employee.email %></td>
+                <td>
+                    <a href="update/<%=employee.employee_id %>" class="btn btn-sm btn-success">Update</a>
+                    <a href="delete/<%=employee.employee_id %>" class="btn btn-sm btn-danger">Delete</a>
+
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

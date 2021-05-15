@@ -1,0 +1,32 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background: #b5c7db;
+}
+.container {
+    max-width: 500px;
+    margin: 80px auto;
+    color: #fff;
+}
+.header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(34, 41, 49, 0.51);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.main .btn {
+    margin-top: 20px;
+    width: 100%;
+    color:  #f8f7f7;
+}
+
+.btn { background:rgba(34, 41, 49, 0.51);
+    cursor: pointer;
+    padding: 5px 15px;
+    border: 0;
+    font-size: 17px;
+    color:  #f8f7f7;
+}

@@ -1,0 +1,28 @@
+body {
+    background-color: #b5c7db;
+}
+
+.col-md-6 {
+    size: 30px;
+}
+ button {
+    cursor: pointer;
+    padding: 5px 15px;
+    border: 0;
+    font-size: 17px;
+    width: 100px;
+     height:70px
+
+}
+
+
+.btn { background:rgba(34, 41, 49, 0.51);
+    cursor: pointer;
+    padding: 5px 15px;
+    border: 0;
+    font-size: 17px;
+}
+
+
+
+
