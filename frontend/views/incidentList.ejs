@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </style>
+
+</head>
+<body style="background: #b5c7db">
+
+<!--Navbar start -->
+
+<nav class="navbar navbar-light" style="background-color: #22293182">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+    <div align="right">
+        <!--Button start -->
+        <a href="/newList" class="btn btn-success" >New</a>
+        <a href="/inProgressList" class="btn btn-success" >In progress</a>
+        <a href="/closedIncident" class="btn btn-success" >Closed</a>
+        <a href="/createInci" class="btn btn-success" role="button" aria-pressed="true"
+        >Go Back</a>
+        <a href="/logud" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+        <!--Button end -->
+    </div>
+</nav>
+<!--Navbar end-->
+
+
+<div class="container">
+    <div align="center">
+        <h2><%= title %></h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Incident id</th>
+            <th>Incident Title</th>
+            <th>Creator</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status id</th>
+            <th>Priority id</th>
+            <th>Department id</th>
+            <th>Employee id</th>
+            <th>Short Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% incidents.forEach(function(incident){ %>
+        <tr>
+            <td><%=incident.incident_id %></td>
+            <td><%=incident.incidentTitle %></td>
+            <td><%=incident.Creator %></td>
+            <td><%=incident.date %></td>
+            <td><%=incident.time %></td>
+            <td><%=incident.status_id %></td>
+            <td><%=incident.priority_id %></td>
+            <td><%=incident.department_id %></td>
+            <td><%=incident.employee_id %></td>
+            <td><%=incident.short_description %></td>
+            <td>
+                <a href="editInci/<%=incident.incident_id %>" class="btn btn-sm btn-success">Edit</a>
+            </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+
+</html>

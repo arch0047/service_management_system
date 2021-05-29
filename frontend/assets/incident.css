@@ -1,28 +1,38 @@
 body {
     background-color: #b5c7db;
 }
+.header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(34, 41, 49, 0.51);;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
 
-.col-md-6 {
+.main {
+    padding: 30px 40px;
+    background: rgba(104, 174, 248, 0.5);
+}
+
+.container {
     size: 30px;
-}
- button {
-    cursor: pointer;
-    padding: 5px 15px;
-    border: 0;
-    font-size: 17px;
     width: 100px;
-     height:70px
-
+    height:50%;
+    padding: 5px 15px;
 }
-
 
 .btn { background:rgba(34, 41, 49, 0.51);
     cursor: pointer;
     padding: 5px 15px;
     border: 0;
     font-size: 17px;
+    width: 100px;
+    height:50%
 }
+.select form-select-lg{
 
+
+}
 
 
 

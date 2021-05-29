@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const mysql = require('mysql');
 
 connection = mysql.createConnection({
@@ -17,5 +17,3 @@ connection.connect((error) => {
         console.log('Database is connected !');
     }
 });
-
-

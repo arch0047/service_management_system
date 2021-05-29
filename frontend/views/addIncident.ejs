@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="frontend/assets/incident.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body style="background: #b5c7db">
+
+<!--Navbar start -->
+<nav class="navbar navbar-light" style="background-color: #22293182">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+    <div align="right">
+        <!--Button start -->
+        <a href="/incidentList" class="btn btn-success" >All Incidents</a>
+        <a href="/newList" class="btn btn-success" >New</a>
+        <a href="/inProgressList" class="btn btn-success" >In progress</a>
+        <a href="/closedIncident" class="btn btn-success" >Closed</a>
+
+        <a href="/empHome" class="btn btn-success" role="button" aria-pressed="true"
+           >Go Back</a>
+        <a href="/logud" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+
+        <!--Button end -->
+    </div>
+</nav>
+<!--Navbar end-->
+<br><br><br>
+<div class="container"  align="center">
+    <header class="header" style=" text-align: center;
+    padding: 20px;
+    background: rgba(34, 41, 49, 0.51);;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;">
+    <h2 style="color: white"><%= title %></h2>
+    </header>
+
+    <form action="/saveInci" method="post">
+        <main class="main" style="padding: 30px 40px;
+    background: rgba(104, 174, 248, 0.5);">
+
+            <div class="form group col-md-6"align="center">
+               <label for="incidentTitle">Incident Title</label>
+               <input type="text" class="form-control" id="incidentTitle" name="incidentTitle" required>
+            </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="creator">Creator Name</label>
+            <input type="text" class="form-control" id="creator" name="creator" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="short_description" class="form-label">Short description</label>
+            <input type="text" class="form-control" id="short_description" name="short_description" required>
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="time">Time</label>
+            <input type="time" class="form-control" id="time" name="time" required >
+        </div>
+
+
+        <div class="form-group col-md-12">
+            <label for="status_id">Status</label>
+            <br>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="status_id"
+                    name="status_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
+
+                <option selected>Select Status</option>
+                <option value="1">New</option>
+                <option value="2">In progress</option>
+                <option value="3">Closed</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="priority_id">Priority</label>
+            <br>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="priority_id"
+                    name="priority_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
+
+                <option selected>Select priority</option>
+                <option value="1">High</option>
+                <option value="2">Medium</option>
+                <option value="3">Low</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="department_id">Department</label>
+            <br>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
+                    name="department_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
+                <option selected>Select department</option>
+                <option value="1">Business</option>
+                <option value="2">It</option>
+                <option value="3">Finance</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="employee_id">Assigned to</label>
+            <Br>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
+                    name="employee_id"required  style=" width: 50%; height: calc(1.5em + .75rem + 2px)"; style=" width: 100%;
+                    height: calc(1.5em + .75rem + 2px)";>
+                <option selected>Select employee id</option>
+                <option value="0">0</option>
+                <option value="0">1</option>
+                <option value="0">2</option>
+                <option value="0">3</option>
+                <option value="0">4</option>
+                <option value="0">5</option>
+            </select>
+        </div>
+
+
+        <!--Form end -->
+
+        <button type="submit" class="btn btn-secondary" style=" background:rgba(34, 41, 49, 0.51)">Submit</button>
+        <br><br>
+        </main>
+    </form>
+</div>
+</body>
+</html>

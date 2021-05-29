@@ -30,3 +30,14 @@ body {
     font-size: 17px;
     color:  #f8f7f7;
 }
+nav.navbar-light{
+    background-color: #22293182
+}
+nav{
+    height:70px;
+    width: 100%
+}
+.navbar-brand h1{
+ color: aliceblue;
+    font-size: xx-large;
+}

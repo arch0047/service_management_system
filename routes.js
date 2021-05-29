@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
+require('dotenv').config()
+
 const port = 8080;
 
 const app = express();
@@ -11,18 +13,24 @@ const database = require('./database');
 
 app.use(express.static("frontend"));
 app.set('views',path.join(__dirname,'frontend/views'));
-
 app.set('view engine', 'ejs');
+
 // adding session
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-// admin login
+//welcome page
+app.get('/', (req, res) => {
+    return res.sendFile(path.join(__dirname + '/frontend/welcome.html'));
+});
+
+// admin login & authentication
 app.get('/login', (req, res) => {
     return res.sendFile(path.join(__dirname + '/frontend/login.html'));
 });
@@ -44,6 +52,7 @@ app.post('/auth', (req, res) => {
             });
         }
     });
+
 // admin home page
 app.get('/adminHome',(req,res) => {
     if(req.session.loggedin) {
@@ -60,12 +69,12 @@ app.get('/register', (req, res) => {
         title: 'Employee registeration'
     });
 } else {
-    res.redirect("/");
+    res.redirect("/adminHome");
 }
 });
 
+// sending mail conformation
 function mailConfirmation(confirmationAcc) {
-
     let transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
@@ -90,6 +99,7 @@ function mailConfirmation(confirmationAcc) {
     });
 }
 
+// adding employee and bcrypt password
 app.post('/saveEmp',  (req, res) => {
     const employeeName = req.body.employeeName;
     const userId = req.body.userId;
@@ -110,6 +120,7 @@ app.post('/saveEmp',  (req, res) => {
     });
 });
 
+
 // getting all employee list
 app.get('/emplist',(req, res) => {
     if (req.session.loggedin) {
@@ -126,6 +137,8 @@ app.get('/emplist',(req, res) => {
     }
 });
 
+
+//update employee by id
 app.get('/update/:employee_id',(req, res) => {
     const employee_id = req.params.employee_id;
     let sql = `Select * from employees where employee_id = ${employee_id}`;
@@ -138,7 +151,7 @@ app.get('/update/:employee_id',(req, res) => {
     });
 });
 
-
+// updating data in to database
 app.post('/update',(req, res) => {
     const employee_id = req.body.employee_id;
     let sql = "update employees SET employeeName='"+req.body.employeeName+"',userId='"+req.body.userId+"', " +
@@ -150,6 +163,8 @@ app.post('/update',(req, res) => {
     });
 });
 
+
+// delete employee
 app.get('/delete/:employee_id',(req, res) => {
     const employee_id = req.params.employee_id;
     let sql = `DELETE from employees where employee_id = ${employee_id}`;
@@ -159,11 +174,7 @@ app.get('/delete/:employee_id',(req, res) => {
     });
 });
 
-// user login page
-app.get('/', (req, res) => {
-    return res.sendFile(path.join(__dirname + '/frontend/userlogin.html'));
-});
-
+// admin logout
 app.get('/logout',(req,res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -174,11 +185,12 @@ app.get('/logout',(req,res) => {
     });
 });
 
+// Employee login page
+app.get('/empLogin', (req, res) => {
+    return res.sendFile(path.join(__dirname + '/frontend/userlogin.html'));
+});
 
-
-
-
-// employee
+// employee authentication
 app.post('/authorization', (req, res) => {
     const userId = req.body.userId;
     const password = req.body.password;
@@ -199,7 +211,7 @@ app.post('/authorization', (req, res) => {
             if (bcrypt.compareSync(password, encryptedPassword) === true)  {
                 req.session.loggedin = true;
                 req.session.userId = userId;
-                res.redirect('/userHome');
+                res.redirect('/empHome');
             } else {
                 res.send('Incorrect User Id or Password !');
             }
@@ -211,25 +223,255 @@ app.post('/authorization', (req, res) => {
     }
 });
 
-// User home page
-app.get('/userHome',(req,res) => {
+// Employee home page
+app.get('/empHome',(req,res) => {
     if(req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/frontend/userHome.html'));
     } else {
-        res.redirect('/');
+        res.redirect('/empLogin');
     }
 });
 
+//employee logout
 app.get('/logud',(req,res) => {
     req.session.destroy((err) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/');
+            res.redirect('/empLogin');
         }
     });
 });
 
+// Incident Page
+//create
+app.get('/createInci', (req, res) => {
+    if (req.session.loggedin) {
+    res.render('addIncident', {
+        title: 'Create new Incident'
+    });
+    } else {
+        res.redirect("/empHome");
+    }
+});
+
+//save
+app.post('/saveInci',(req, res)=>{
+    console.log(req.body);
+    const data1 ={incidentTitle, creator, date, time, status_id, priority_id, department_id, employee_id, short_description}= req.body;
+    let sql = "INSERT INTO incidents SET ?";
+
+    let query = connection.query(sql, data1,(err, results) => {
+        if(err) throw err;
+        res.redirect('/incidentList');
+    });
+});
+
+// getting all incidents list
+app.get('/incidentList',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "SELECT * FROM incidents";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('incidentList.ejs', {
+                title: 'Incidents List',
+                incidents: rows
+            });
+        });
+    } else {
+        res.redirect("/emplogin");
+    }
+});
+
+//Edit incident by incident_id
+app.get('/editInci/:incident_id',(req, res)=>{
+    const incident_id = req.params.incident_id;
+    let sql = `Select * from incidents where incident_id =${incident_id}`;
+    let query = connection.query(sql,(err,result)=>{
+        if(err)throw err,
+            console.log(result);
+            res.render('updateIncident',{
+                title: 'Edit Incident',
+                incident :result[0]
+            });
+    });
+
+});
+
+// updating data into the database
+app.post('/editInci',(req, res) => {
+    const incident_id = req.body.incident_id;
+    let sql = "update incidents SET incidentTitle='"+req.body.incidentTitle+"',status_id='"+req.body.status_id+"', " +
+        "priority_id='"+req.body.priority_id+"',department_id ='"+req.body.department_id+"',employee_id='"+req.body.employee_id+"'," +
+        "short_description ='"+req.body.short_description+"'where incident_id ="+incident_id;
+
+
+    let query = connection.query(sql,(err, results) => {
+        console.log(results);
+        if(err) throw err;
+        res.redirect('/incidentList');
+    });
+});
+
+// getting new incidents list by status
+app.get('/newList',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from incidents where status_id =1";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('incidentList.ejs', {
+                title: 'New incidents List',
+                incidents: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
+// In progress incidents List
+app.get('/inProgressList',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from incidents where status_id =2";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('incidentList.ejs', {
+                title: 'In progress incidents List',
+                incidents: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
+
+// getting Closed incidents List
+app.get('/closedIncident',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from incidents where status_id =3";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('incidentList.ejs', {
+                title: 'Closed incidents List',
+                incidents: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
+
+// Demand Page
+//create
+app.get('/demand_create', (req, res) => {
+    if (req.session.loggedin) {
+        res.render('createDemand', {
+            title: 'Create new Demand'
+        });
+    } else {
+        res.redirect("/empHome");
+    }
+});
+
+//save
+app.post('/save',(req, res)=>{
+    const data ={demandTitle,requester,department_id,employee_id,status_id,priority_id,date,time,businessNeed,presentSituation,benefits}= req.body;
+    let sql = "INSERT INTO demands SET ?";
+    let query = connection.query(sql, data,(err, results) => {
+        if(err) throw err;
+        res.redirect('/demandList');
+    });
+});
+
+// getting all demands list
+app.get('/demandList',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "SELECT * FROM demands";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('demandList.ejs', {
+                title: 'Demands List',
+                demands: rows
+            });
+        });
+    } else {
+        res.redirect("/empHome");
+    }
+});
+
+//Edit demand
+app.get('/demand/:demand_id',(req, res)=>{
+    const demand_id = req.params.demand_id;
+    let sql = `Select * from demands where demand_id =${demand_id}`;
+    let query = connection.query(sql,(err,result)=>{
+        if(err)throw err;
+        res.render('updateDemand',{
+            title: 'Edit Demand',
+            demand :result[0]
+        });
+    });
+});
+
+app.post('/edit',(req, res) => {
+    const demand_id = req.body.demand_id;
+    let sql = "update demands SET demandTitle='"+req.body.demandTitle+"',requester='"+req.body.requester+"', "+
+        "department_id ='"+req.body.department_id+"',employee_id='"+req.body.employee_id+"', " +
+        "status_id='"+req.body.status_id+"',priority_id ='"+req.body.priority_id+"',date='"+req.body.date+"'," +
+        "time ='"+req.body.time+"',businessNeed ='"+req.body.businessNeed+"'," +
+        "presentSituation ='"+req.body.presentSituation+"',benefits ='"+req.body.benefits+"' where incident_id ="+incident_id;
+    let query = connection.query(sql,(err, results) => {
+        console.log(results);
+        if(err) throw err;
+        res.redirect('/demandList');
+    });
+});
+
+// getting new demands list by status
+app.get('/demand_new',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from demands where status_id = 1";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('demandList.ejs', {
+                title: 'New demands List',
+                demands: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
+
+// In progress demands List
+app.get('/demand_inProgress',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from demands where status_id =2";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('demandList.ejs', {
+                title: 'In progress demands List',
+                demands: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
+
+// getting Closed incidents List
+app.get('/demand_closed',(req, res) => {
+    if (req.session.loggedin) {
+        let sql = "Select * from demands where status_id =3";
+        let query = connection.query(sql, (err, rows) => {
+            if (err) throw err;
+            res.render('demandList.ejs', {
+                title: 'Closed demands List',
+                demands: rows
+            });
+        });
+    } else {
+        res.send("<h1>Please choose again there was an error !</h1>");
+    }
+});
 
 
 

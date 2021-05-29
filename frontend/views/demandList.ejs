@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body style="background: #b5c7db">
+
+<!--Navbar start -->
+<nav class="navbar navbar-light" style="background-color: #22293182">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+    <div align="right">
+        <!--Button start -->
+        <a href="/demand_new" class="btn btn-success" >New</a>
+        <a href="/demand_inProgress" class="btn btn-success" >In progress</a>
+        <a href="/demand_closed" class="btn btn-success" >Closed</a>
+        <a href="/demand_create" class="btn btn-success" role="button" aria-pressed="true">Go Back</a>
+        <a href="/logud" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+        <!--Button end -->
+    </div>
+</nav>
+<!--Navbar end-->
+
+<div class="container">
+    <div align="center">
+        <h2><%= title %></h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Demand id</th>
+            <th>Demand Title</th>
+            <th>Requester</th>
+            <th>Business Need</th>
+            <th>Present Situation</th>
+            <th>Benefit</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status id</th>
+            <th>Priority id</th>
+            <th>Department id</th>
+            <th>Employee id</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <% demands.forEach(function(demand){ %>
+        <tr>
+            <td><%=demand.demand_id %></td>
+            <td><%=demand.demandTitle %></td>
+            <td><%=demand.Creator %></td>
+            <td><%=demand.businessNeed %></td>
+            <td><%=demand.presentSituation %></td>
+            <td><%=demand.benefits %></td>
+            <td><%=demand.date %></td>
+            <td><%=demand.time %></td>
+            <td><%=demand.status_id %></td>
+            <td><%=demand.priority_id %></td>
+            <td><%=demand.department_id %></td>
+            <td><%=demand.employee_id %></td>
+            <td>
+                <a href="edit/<%=demand.demand_id %>" class="btn btn-sm btn-success">Edit</a>
+            </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

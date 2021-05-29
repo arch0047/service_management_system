@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../assets/updateincident.css">
+</head>
+<body style="background: #b5c7db">
+
+<!--Navbar start -->
+<nav class="navbar navbar-light" style="background-color: #22293182">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+    <div align="right">
+        <!--Button start -->
+        <a href="/IncidentList" class="btn btn-secondary" role="button" aria-pressed="true" style=" background:rgba(34, 41, 49, 0.51)">Go back</a>
+        <a href="/logud" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
+        <!--Button end -->
+    </div>
+</nav>
+<!--Navbar end-->
+
+<br><br><br>
+<div class="container">
+    <h1><%= title %></h1>
+    <div class="container">
+        <form action="/editInci" method="post">
+            <input type="hidden" value="<%= incident.incident_id %>" name="incident_id">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="incidentTitle">Incident Title:</label>
+                    <input type="text" class="form-control" id="incidentTitle"
+                           value="<%= incident.incidentTitle %>" name="incidentTitle" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                <label for="creator">Creator</label>
+                <input type="text" class="form-control" id="creator"
+                       value="<%= incident.creator %>" name="creator" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date"
+                           value="<%= incident.date %>" name="date" required>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label for="time">Time</label>
+                    <input type="time" class="form-control" id="time"
+                           value="<%= incident.time %>" name="time" required>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label for="short_description">Short Description</label>
+                    <input type="text" class="form-control" id="short_description"
+                           value="<%= incident.short_description %>" name="short_description" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="status_id">Status Id</label>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="status_id"
+                            value="<%= incident.status_id %>" name="status_id" required> name="status_id"required>
+                        <option value="1">New</option>
+                        <option value="2">In progress</option>
+                        <option value="3">Closed</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="priority_id">Priority id</label>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="priority_id"
+                            value="<%= incident.priority_id %>" name="priority_id" required>
+                        <option value="1">High</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="department_id">Department Id:</label>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
+                            value="<%= incident.department_id %>" name="department_id" required>
+                        <option value="1">Business</option>
+                        <option value="2">It</option>
+                        <option value="3">Finance</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="employee_id">Employee Id</label>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
+                            value="<%= incident.employee_id %>" name="employee_id" required>
+                        <option value="0">0</option>
+                        <option value="0">1</option>
+                        <option value="0">2</option>
+                        <option value="0">3</option>
+                        <option value="0">4</option>
+                        <option value="0">5</option>
+                    </select>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="comments"></label><textarea class="form-control form-control-lg mb-3" rows="3" name="comments" id="comments"
+                                                                    value="<%= incident.comment %>" name="comment" required placeholder="Your comment...">
+
+
+                    </textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success"style=" background:rgba(34, 41, 49, 0.51)">Edit</button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+
+</html>
