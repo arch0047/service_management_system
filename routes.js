@@ -457,7 +457,7 @@ app.get('/demand_inProgress',(req, res) => {
     }
 });
 
-// getting Closed incidents List
+// getting Closed demands List
 app.get('/demand_closed',(req, res) => {
     if (req.session.loggedin) {
         let sql = "Select * from demands where status_id =3";
