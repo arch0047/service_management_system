@@ -38,7 +38,7 @@
 
                 <div class="form-group col-md-6">
                 <label for="creator">Creator</label>
-                <input type="text" class="form-control" id="creator"
+                <input pattern="[a-zA-Z -]+" minlength="4" type="text" class="form-control" id="creator"
                        value="<%= incident.creator %>" name="creator" required>
                 </div>
 

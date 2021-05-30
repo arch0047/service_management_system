@@ -2,9 +2,11 @@ const express = require("express");
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { Validator } = require('node-input-validator');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 require('dotenv').config()
+
 
 const port = 8080;
 
@@ -105,7 +107,6 @@ app.post('/saveEmp',  (req, res) => {
     const userId = req.body.userId;
     const plainPassword = req.body.password;
     let password = bcrypt.hashSync(plainPassword, 10);
-
     const email = req.body.email;
     const department_id = req.body.department_id;
     const data = {employeeName,userId, password,email,department_id};
@@ -115,11 +116,10 @@ app.post('/saveEmp',  (req, res) => {
             res.redirect('/register');
             throw err;
         } else{
-            res.redirect('/emplist') // redirect to all employee list
+            res.redirect('/emplist');   // redirect to all employee list
             mailConfirmation(email);}
+        });
     });
-});
-
 
 // getting all employee list
 app.get('/emplist',(req, res) => {
@@ -289,7 +289,6 @@ app.get('/editInci/:incident_id',(req, res)=>{
     let sql = `Select * from incidents where incident_id =${incident_id}`;
     let query = connection.query(sql,(err,result)=>{
         if(err)throw err,
-            console.log(result);
             res.render('updateIncident',{
                 title: 'Edit Incident',
                 incident :result[0]

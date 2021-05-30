@@ -52,7 +52,7 @@
 
         <div class="form-group col-md-6">
             <label for="creator">Creator Name</label>
-            <input type="text" class="form-control" id="creator" name="creator" required>
+            <input pattern="[a-zA-Z -]+" minlength="4" type="text" class="form-control" id="creator" name="creator" required >
         </div>
 
         <div class="form-group col-md-6">
@@ -63,7 +63,7 @@
 
         <div class="form-group col-md-6">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" name="date" required>
+            <input type="date" class="form-control" id="date-picker" name="date" required>
         </div>
 
         <div class="form-group col-md-6">
@@ -75,13 +75,9 @@
         <div class="form-group col-md-12">
             <label for="status_id">Status</label>
             <br>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="status_id"
-                    name="status_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
-
-                <option selected>Select Status</option>
+            <select class="form-select form-select-lg mb-3" aria-label=".Disabled select example" id="status_id"
+                    name="status_id"  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
                 <option value="1">New</option>
-                <option value="2">In progress</option>
-                <option value="3">Closed</option>
             </select>
         </div>
 
@@ -89,9 +85,9 @@
             <label for="priority_id">Priority</label>
             <br>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="priority_id"
-                    name="priority_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
+                    name="priority_id" style=" width: 50%;height: calc(1.5em + .75rem + 2px)" required>
 
-                <option selected>Select priority</option>
+                <option value="" disabled selected>Select priority</option>
                 <option value="1">High</option>
                 <option value="2">Medium</option>
                 <option value="3">Low</option>
@@ -102,8 +98,8 @@
             <label for="department_id">Department</label>
             <br>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
-                    name="department_id"required  style=" width: 50%;height: calc(1.5em + .75rem + 2px)";>
-                <option selected>Select department</option>
+                    name="department_id" style=" width: 50%;height: calc(1.5em + .75rem + 2px)" required>
+                <option value="" disabled selected>Select department</option>
                 <option value="1">Business</option>
                 <option value="2">It</option>
                 <option value="3">Finance</option>
@@ -114,15 +110,10 @@
             <label for="employee_id">Assigned to</label>
             <Br>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
-                    name="employee_id"required  style=" width: 50%; height: calc(1.5em + .75rem + 2px)"; style=" width: 100%;
-                    height: calc(1.5em + .75rem + 2px)";>
-                <option selected>Select employee id</option>
+                    name="employee_id" style=" width: 50%; height: calc(1.5em + .75rem + 2px)"; style=" width: 100%;
+                    height: calc(1.5em + .75rem + 2px)" required>
                 <option value="0">0</option>
-                <option value="0">1</option>
-                <option value="0">2</option>
-                <option value="0">3</option>
-                <option value="0">4</option>
-                <option value="0">5</option>
+
             </select>
         </div>
 
@@ -133,6 +124,16 @@
         <br><br>
         </main>
     </form>
+
 </div>
 </body>
+<script>
+    var date = new date();
+    var year =date.getFullYear();
+    var month = date.getMonth()+1;
+    var todayDate =String(date.getDate()).padStart(2,'0');
+    var datePattern =year +'-'+ month + '-'+ todayDate;
+    document.getElementById("date-picker").value= datePattern;
+</script>
+
 </html>

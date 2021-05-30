@@ -38,7 +38,7 @@
 
             <div class="form-group col-md-6">
                 <label for="requester">Requester</label>
-                <input type="text" class="form-control" id="requester"
+                <input pattern="[a-zA-Z -]+" minlength="4" type="text" class="form-control" id="requester"
                        value="<%= demand.requester%>" name="requester" required>
             </div>
 
