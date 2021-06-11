@@ -12,8 +12,8 @@
 <body style="background: #b5c7db">
 
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: black">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large;font-family: poppins;">Service Management System</span>
     <div align="right">
         <!--Button start -->
         <a href="/demandList" class="btn btn-secondary" role="button" aria-pressed="true" style=" background:rgba(34, 41, 49, 0.51)">Go back</a>
@@ -52,9 +52,16 @@
             <div class="form-group col-md-6">
                 <label for="time">Time</label>
                 <input type="time" class="form-control" id="time"
-                       value="<%= demand.time %>" name="time" required>
+                       value="<%= demand.time %>" name="time" id="currentTimeD" required>
+
             </div>
 
+            <script>
+                var todayTimeD = new Date();
+                var timeStringD = todayTimeD.getHours() + ":" + todayTimeD.getMinutes() + ":" + todayTimeD.getSeconds();
+                document.getElementById("currentTimeD").value = timeStringD;
+
+            </script>
 
             <div class="form-group col-md-6">
                 <label for="businessNeed">Business Need</label>
@@ -100,19 +107,6 @@
                     <option value="1">Business</option>
                     <option value="2">It</option>
                     <option value="3">Finance</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label for="employee_id">Employee Id</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
-                        value="<%= demand.employee_id %>" name="employee_id" required>
-                    <option value="0">0</option>
-                    <option value="0">1</option>
-                    <option value="0">2</option>
-                    <option value="0">3</option>
-                    <option value="0">4</option>
-                    <option value="0">5</option>
                 </select>
             </div>
 

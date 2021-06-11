@@ -1,12 +1,13 @@
-require('dotenv').config()
+require('dotenv').config();
 const mysql = require('mysql');
 
 connection = mysql.createConnection({
-    database:'service_management',
-    user:'root',
-    password: 'password',
-    host: '127.0.0.1',
-    port: 3306
+    host:process.env.HOST,
+    database: process.env.DATABASE,
+    port:process.env.PORT,
+    user:process.env.DATAUSER,
+    password:process.env.DATAPASS
+
 });
 
 connection.connect((error) => {
@@ -14,6 +15,6 @@ connection.connect((error) => {
         console.log(error);
     }
     else {
-        console.log('Database is connected !');
+        console.log(" Database is connected on port !");
     }
 });

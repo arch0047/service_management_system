@@ -9,32 +9,24 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: poppins;
     font-size: 16px;
     background: #b5c7db;
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_504303998_336734.jpg");
 }
-
 h1{
     text-align:center;
     text-decoration-color: white;
+    font-size: xxx-large;
+
 }
 div {
-    position:center;
     top: 30%;
-    left:50%;
+    left:90%;
+    transform: none;
+    position: absolute;
 
-}
-.dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
 
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
 }
 .container {
     max-width: 500px;
@@ -42,11 +34,16 @@ div {
     color: #fff;
 }
 
-.dropdown {
-    position: fixed;
-    display: inherit;
-}
 
+.dropdownbtn {
+    background-color:white;
+    padding: 10px;
+    font-size: 16px;
+    border:solid black;
+    cursor: pointer;
+    position: absolute;
+
+}
 .dropdown-content {
     display: none;
     position: center;
@@ -56,14 +53,15 @@ div {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-
 .dropdown-content a {
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    background-color: black;
 }
+.dropdown-content a:hover {background-color: lightslategray;}
 
-.dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+

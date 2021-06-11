@@ -13,14 +13,14 @@
 <body style="background: #b5c7db">
 
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue;">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: black">
+    <span class="navbar-brand h1 " style="color: aliceblue;font-size: xx-large;font-family: poppins;">Service Management System</span>
     <div align="right">
         <!--Button start -->
-        <a href="/register" class="btn btn-success" >Register New Employee</a>
-        <a href="/adminHome" class="btn btn-success" role="button" aria-pressed="true"
+        <a href="/register" class="btn btn-secondary" >Register Employee</a>
+        <a href="/adminHome" class="btn btn-secondary" role="button" aria-pressed="true"
            >Go Back</a>
-        <a href="/logout" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+        <a href="/logout" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
 
         <!--Button end -->
     </div>
@@ -59,7 +59,6 @@
                 <td>
                     <a href="update/<%=employee.employee_id %>" class="btn btn-sm btn-success">Update</a>
                     <a href="delete/<%=employee.employee_id %>" class="btn btn-sm btn-danger">Delete</a>
-
                 </td>
             </tr>
         <% }); %>

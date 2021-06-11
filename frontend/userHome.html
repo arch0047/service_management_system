@@ -12,8 +12,8 @@
 <body>
 
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue ; font-size: xx-large">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: #262626">
+    <span class="navbar-brand h1 " style="color: aliceblue ; font-size: xx-large; font-family: poppins">Service Management System</span>
     <div align="right">
         <!--Button start -->
         <a href="/logud" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
@@ -21,20 +21,46 @@
     </div>
 </nav>
 <!--Navbar end-->
-<br> <br>
-<br> <br>
-
-<div align="center" class="container" >
-    <header class="header">
-        <h1><i class="fas fa-users"></i>Employee Home Page</h1>
-    </header>
-    <main class="main">
-        <br>
-        <a href="/createInci" class="btn btn-primary" >Create New incident</a>
-        <a href="/demand_create" class="btn btn-primary" >Create New Demand</a>
-        <br> <br>
-    </main>
+<div class="wrapper">
+    <ul>
+        <li>About</li>
+        <li>Contact</li>
+        <li>Help & support</li>
+        <li>Services
+            <ul>
+                <li >Incident
+                   <ul>
+                       <li><a href="/createInci" >Create</a></li>
+                       <li >See list
+                          <ul>
+                              <li><a href="/incidentList">All Incidents</a></li>
+                              <li><a href="/newList" >New </a></li></li>
+                              <li><a href="/inProgressList" >In Progress</a></li></li>
+                              <li><a href="/closedIncident"  >Closed </a></li>
+                          </ul>
+                       </li>
+                   </ul>
+                <li>Demand
+                    <ul>
+                        <li><a href="/demand_create"  >Create </a></li>
+                        <li >See list
+                            <ul>
+                                <li><a href="/demandList" >All Demands</a></li>
+                                <li><a href="/demand_new" >New </a></li>
+                                <li><a href="/demand_inProgress"  >In Progress</a></li>
+                                <li><a href="/demand_closed"  >Closed</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
-<div align="center" id="content"></div>
+<br><br><br>
+<div class="container">
+    <h1 align="center" style="font-family: poppins"><i class="fas fa-users"></i>Employee Home Page</h1>
+</div>
+  
 </body>
 </html>

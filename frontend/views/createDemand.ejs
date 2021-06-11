@@ -12,15 +12,17 @@
 <body style="background: #b5c7db">
 
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: black">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large; font-family: poppins;">Service Management System</span>
     <div align="right">
         <!--Button start -->
-        <a href="/demandList" class="btn btn-secondary" >See Demands List</a>
+        <a href="/demandList" class="btn btn-secondary" >All Demands</a>
+        <a href="/demand_new" class="btn btn-secondary" >New</a>
+        <a href="/demand_inProgress" class="btn btn-secondary" >In progress</a>
+        <a href="/demand_closed" class="btn btn-secondary" >Closed</a>
         <a href="/empHome" class="btn btn-secondary" role="button" aria-pressed="true"
-           style=" background:rgba(34, 41, 49, 0.51)">Go Back</a>
+           >Go Back</a>
         <a href="/logud" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
-
         <!--Button end -->
     </div>
 </nav>
@@ -30,7 +32,7 @@
 <div class="container"  align="center">
     <header class="header" style=" text-align: center;
     padding: 20px;
-    background: rgba(34, 41, 49, 0.51);;
+    background: rgba(34, 41, 49, 0.45);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;">
         <h2 style="color: white" ><%= title %></h2>
@@ -38,7 +40,7 @@
 
     <form action="/save" method="post">
         <main class="main" style="padding: 30px 40px;
-    background: rgba(104, 174, 248, 0.5);">
+    background: rgba(34, 41, 49, 0.51);">
 
             <div class="form group col-md-6"align="center">
                 <label for="demandTitle">Demand Title</label>
@@ -101,7 +103,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <label for="department_id">Department</label>
+                <label for="department_id">Assigned to Department</label>
                 <br>
                 <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
                         name="department_id"  style=" width: 50%;height: calc(1.5em + .75rem + 2px)"; required>
@@ -111,19 +113,6 @@
                     <option value="3">Finance</option>
                 </select>
             </div>
-
-            <div class="form-group col-md-12">
-                <label for="employee_id">Assigned to</label>
-                <Br>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
-                        name="employee_id"  style=" width: 50%; height: calc(1.5em + .75rem + 2px)"; style=" width: 100%;
-                    height: calc(1.5em + .75rem + 2px)"; required>
-                    <option value="0">0</option>
-
-                </select>
-            </div>
-
-
             <!--Form end -->
 
             <button type="submit" class="btn btn-secondary" style=" background:rgba(34, 41, 49, 0.51)">Submit</button>

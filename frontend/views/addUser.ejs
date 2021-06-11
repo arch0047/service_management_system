@@ -6,31 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/frontend/assets/home.css">
+    <link rel="stylesheet" href="./frontend/assets/adminHome.css">
 
 </head>
 <body style="background: #b5c7db">
-
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: black">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large ; font-family: poppins;">Service Management System</span>
     <div align="right">
         <!--Button start -->
-        <a href="/empList" class="btn btn-success" >See Employee List</a>
-        <a href="/adminHome" class="btn btn-success" role="button" aria-pressed="true">Go Back</a>
-        <a href="/logout" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+        <a href="/empList"class="btn btn-secondary" >See Employee List</a>
+        <a href="/adminHome" role="button" aria-pressed="true" class="btn btn-secondary">Go Back</a>
+        <a href="/logout"  role="button" aria-pressed="true"class="btn btn-secondary">Logout</a>
         <!--Button end -->
     </div>
 </nav>
 <!--Navbar end-->
-
-<br><br><br>
+<br>
 <div class="container">
     <h2><%= title %></h2>
     <form action="/saveEmp" method="post">
         <div class="form-group">
             <label for="employeeName">Employee Name:</label>
-            <input pattern="[a-zA-Z -]+" minlength="4"  type="text" class="form-control" id="employeeName" placeholder="Employee Name" name="employeeName" required>
+            <input pattern="[a-zA-Z -]+"  minlength="4" type="text" class="form-control" id="employeeName" placeholder="Employee Name" name="employeeName" required>
         </div>
         <div class="form-group">
             <label for="userId">User Id:</label>
@@ -53,6 +51,6 @@
         <br><br>
     </form>
 </div>
-
+</div>
 </body>
 </html>

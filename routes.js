@@ -2,13 +2,13 @@ const express = require("express");
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { Validator } = require('node-input-validator');
+
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 require('dotenv').config()
 
 
-const port = 8080;
+const port = 2000;
 
 const app = express();
 const database = require('./database');
@@ -78,16 +78,15 @@ app.get('/register', (req, res) => {
 // sending mail conformation
 function mailConfirmation(confirmationAcc) {
     let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        service: 'outlook',
         auth: {
-            user: 'noemi.feeney@ethereal.email',
-            pass: 'qY6JucY6CC3yUdpEqt'
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
     });
 
     let mailOptions = {
-        from: '"Nodemailer contact" <noemi.feeney@ethereal.email>', // sender
+        from: 'Biree10@hotmail.com', // sender
         to: confirmationAcc,
         subject: 'Welcome ' + confirmationAcc,
         text: 'En account for you ' + confirmationAcc + 'has been successfully created!'
@@ -95,7 +94,7 @@ function mailConfirmation(confirmationAcc) {
 
     transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
-            return console.log('There was an error sending confirmation mail...');
+            return console.log('There was an error sending confirmation mail...',err);
         }
         return console.log('Confirmation mail sent...');
     });
@@ -258,7 +257,7 @@ app.get('/createInci', (req, res) => {
 //save
 app.post('/saveInci',(req, res)=>{
     console.log(req.body);
-    const data1 ={incidentTitle, creator, date, time, status_id, priority_id, department_id, employee_id, short_description}= req.body;
+    const data1 ={incidentTitle,creator,date,time,status_id,priority_id,department_id,short_description}= req.body;
     let sql = "INSERT INTO incidents SET ?";
 
     let query = connection.query(sql, data1,(err, results) => {
@@ -272,9 +271,10 @@ app.get('/incidentList',(req, res) => {
     if (req.session.loggedin) {
         let sql = "SELECT * FROM incidents";
         let query = connection.query(sql, (err, rows) => {
+
             if (err) throw err;
             res.render('incidentList.ejs', {
-                title: 'Incidents List',
+                title: 'All Incidents List',
                 incidents: rows
             });
         });
@@ -288,7 +288,7 @@ app.get('/editInci/:incident_id',(req, res)=>{
     const incident_id = req.params.incident_id;
     let sql = `Select * from incidents where incident_id =${incident_id}`;
     let query = connection.query(sql,(err,result)=>{
-        if(err)throw err,
+        if(err)throw err;
             res.render('updateIncident',{
                 title: 'Edit Incident',
                 incident :result[0]
@@ -300,13 +300,12 @@ app.get('/editInci/:incident_id',(req, res)=>{
 // updating data into the database
 app.post('/editInci',(req, res) => {
     const incident_id = req.body.incident_id;
-    let sql = "update incidents SET incidentTitle='"+req.body.incidentTitle+"',status_id='"+req.body.status_id+"', " +
-        "priority_id='"+req.body.priority_id+"',department_id ='"+req.body.department_id+"',employee_id='"+req.body.employee_id+"'," +
+    let sql = "update incidents SET incidentTitle='"+req.body.incidentTitle+"',date='"+req.body.date+"',time='"+req.body.time+"'," +
+        "status_id='"+req.body.status_id+"',priority_id='"+req.body.priority_id+"',department_id ='"+req.body.department_id+"'," +
         "short_description ='"+req.body.short_description+"'where incident_id ="+incident_id;
 
 
     let query = connection.query(sql,(err, results) => {
-        console.log(results);
         if(err) throw err;
         res.redirect('/incidentList');
     });
@@ -373,7 +372,7 @@ app.get('/demand_create', (req, res) => {
 
 //save
 app.post('/save',(req, res)=>{
-    const data ={demandTitle,requester,department_id,employee_id,status_id,priority_id,date,time,businessNeed,presentSituation,benefits}= req.body;
+    const data ={demandTitle,requester,department_id,status_id,priority_id,date,time,businessNeed,presentSituation,benefits}= req.body;
     let sql = "INSERT INTO demands SET ?";
     let query = connection.query(sql, data,(err, results) => {
         if(err) throw err;
@@ -388,7 +387,7 @@ app.get('/demandList',(req, res) => {
         let query = connection.query(sql, (err, rows) => {
             if (err) throw err;
             res.render('demandList.ejs', {
-                title: 'Demands List',
+                title: 'All Demands List',
                 demands: rows
             });
         });
@@ -398,7 +397,7 @@ app.get('/demandList',(req, res) => {
 });
 
 //Edit demand
-app.get('/demand/:demand_id',(req, res)=>{
+app.get('/edit/:demand_id',(req, res)=>{
     const demand_id = req.params.demand_id;
     let sql = `Select * from demands where demand_id =${demand_id}`;
     let query = connection.query(sql,(err,result)=>{
@@ -413,12 +412,12 @@ app.get('/demand/:demand_id',(req, res)=>{
 app.post('/edit',(req, res) => {
     const demand_id = req.body.demand_id;
     let sql = "update demands SET demandTitle='"+req.body.demandTitle+"',requester='"+req.body.requester+"', "+
-        "department_id ='"+req.body.department_id+"',employee_id='"+req.body.employee_id+"', " +
-        "status_id='"+req.body.status_id+"',priority_id ='"+req.body.priority_id+"',date='"+req.body.date+"'," +
-        "time ='"+req.body.time+"',businessNeed ='"+req.body.businessNeed+"'," +
-        "presentSituation ='"+req.body.presentSituation+"',benefits ='"+req.body.benefits+"' where incident_id ="+incident_id;
+        "department_id ='"+req.body.department_id+"',status_id='"+req.body.status_id+"', " +
+        "priority_id ='"+req.body.priority_id+"',date='"+req.body.date+"',time ='"+req.body.time+"'," +
+        "businessNeed ='"+req.body.businessNeed+"',presentSituation ='"+req.body.presentSituation+"'," +
+        "benefits ='"+req.body.benefits+"' where demand_id ="+demand_id;
+
     let query = connection.query(sql,(err, results) => {
-        console.log(results);
         if(err) throw err;
         res.redirect('/demandList');
     });

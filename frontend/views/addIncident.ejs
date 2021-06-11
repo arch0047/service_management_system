@@ -13,28 +13,28 @@
 <body style="background: #b5c7db">
 
 <!--Navbar start -->
-<nav class="navbar navbar-light" style="background-color: #22293182">
-    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large">Service Management System</span>
+<nav class="navbar navbar-light" style="background-color: black">
+    <span class="navbar-brand h1 " style="color: aliceblue; font-size: xx-large ; font-family: poppins">Service Management System</span>
     <div align="right">
         <!--Button start -->
-        <a href="/incidentList" class="btn btn-success" >All Incidents</a>
-        <a href="/newList" class="btn btn-success" >New</a>
-        <a href="/inProgressList" class="btn btn-success" >In progress</a>
-        <a href="/closedIncident" class="btn btn-success" >Closed</a>
-
-        <a href="/empHome" class="btn btn-success" role="button" aria-pressed="true"
+        <a href="/incidentList" class="btn btn-secondary" >All Incidents</a>
+        <a href="/newList" class="btn btn-secondary" >New</a>
+        <a href="/inProgressList" class="btn btn-secondary" >In progress</a>
+        <a href="/closedIncident" class="btn btn-secondary" >Closed</a>
+        <a href="/empHome" class="btn btn-secondary" role="button" aria-pressed="true"
            >Go Back</a>
-        <a href="/logud" class="btn btn-success" role="button" aria-pressed="true">Logout</a>
+        <a href="/logud" class="btn btn-secondary" role="button" aria-pressed="true">Logout</a>
 
         <!--Button end -->
     </div>
 </nav>
+
 <!--Navbar end-->
 <br><br><br>
 <div class="container"  align="center">
     <header class="header" style=" text-align: center;
     padding: 20px;
-    background: rgba(34, 41, 49, 0.51);;
+    background: rgba(34, 41, 49, 0.45);;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;">
     <h2 style="color: white"><%= title %></h2>
@@ -42,7 +42,7 @@
 
     <form action="/saveInci" method="post">
         <main class="main" style="padding: 30px 40px;
-    background: rgba(104, 174, 248, 0.5);">
+    background: rgba(34, 41, 49, 0.51);">
 
             <div class="form group col-md-6"align="center">
                <label for="incidentTitle">Incident Title</label>
@@ -52,7 +52,7 @@
 
         <div class="form-group col-md-6">
             <label for="creator">Creator Name</label>
-            <input pattern="[a-zA-Z -]+" minlength="4" type="text" class="form-control" id="creator" name="creator" required >
+            <input pattern="[a-zA-Z -]+" minlength="4" title=" Use alphabets only !" type="text" class="form-control" id="creator" name="creator" required >
         </div>
 
         <div class="form-group col-md-6">
@@ -63,14 +63,26 @@
 
         <div class="form-group col-md-6">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date-picker" name="date" required>
+            <input type="text" class="form-control" id="currentDate" name="date" required>
         </div>
+
+            <script>
+                var todayDate = new Date();
+                var dateString = todayDate.getFullYear()+'-'+(todayDate.getMonth()+1)+'-'+todayDate.getDate();
+                document.getElementById("currentDate").value = dateString;
+            </script>
 
         <div class="form-group col-md-6">
             <label for="time">Time</label>
-            <input type="time" class="form-control" id="time" name="time" required >
+            <input type="text" class="form-control" id="currentTime" name="time" required >
         </div>
 
+            <script>
+                var todayTime = new Date();
+                var timeString = todayTime.getHours() + ":" + todayTime.getMinutes() + ":" + todayTime.getSeconds();
+                document.getElementById("currentTime").value = timeString;
+
+            </script>
 
         <div class="form-group col-md-12">
             <label for="status_id">Status</label>
@@ -95,7 +107,7 @@
         </div>
 
         <div class="form-group col-md-12">
-            <label for="department_id">Department</label>
+            <label for="department_id">Assigned to Department</label>
             <br>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
                     name="department_id" style=" width: 50%;height: calc(1.5em + .75rem + 2px)" required>
@@ -105,19 +117,6 @@
                 <option value="3">Finance</option>
             </select>
         </div>
-
-        <div class="form-group col-md-12">
-            <label for="employee_id">Assigned to</label>
-            <Br>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="employee_id"
-                    name="employee_id" style=" width: 50%; height: calc(1.5em + .75rem + 2px)"; style=" width: 100%;
-                    height: calc(1.5em + .75rem + 2px)" required>
-                <option value="0">0</option>
-
-            </select>
-        </div>
-
-
         <!--Form end -->
 
         <button type="submit" class="btn btn-secondary" style=" background:rgba(34, 41, 49, 0.51)">Submit</button>
@@ -127,13 +126,6 @@
 
 </div>
 </body>
-<script>
-    var date = new date();
-    var year =date.getFullYear();
-    var month = date.getMonth()+1;
-    var todayDate =String(date.getDate()).padStart(2,'0');
-    var datePattern =year +'-'+ month + '-'+ todayDate;
-    document.getElementById("date-picker").value= datePattern;
-</script>
+
 
 </html>
