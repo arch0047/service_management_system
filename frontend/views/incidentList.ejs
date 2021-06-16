@@ -51,6 +51,7 @@
             <th>Priority id</th>
             <th>Department id</th>
             <th>Short Description</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -66,7 +67,7 @@
             <td><%=incident.department_id %></td>
             <td><%=incident.short_description %></td>
             <td>
-                <a href="editInci/<%=incident.incident_id %>" class="btn btn-sm btn-success">Edit</a>
+                <a href="editInci/<%=incident.incident_id %>" class="btn btn-sm btn-success">Update</a>
             </td>
         </tr>
         <% }); %>

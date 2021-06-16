@@ -39,7 +39,7 @@
             <div class="form-group col-md-6">
                 <label for="requester">Requester</label>
                 <input pattern="[a-zA-Z -]+" minlength="4" type="text" class="form-control" id="requester"
-                       value="<%= demand.requester%>" name="requester" required>
+                       value="<%= demand.requester%>" name="requester" readonly="readonly">
             </div>
 
             <div class="form-group col-md-6">
@@ -52,16 +52,9 @@
             <div class="form-group col-md-6">
                 <label for="time">Time</label>
                 <input type="time" class="form-control" id="time"
-                       value="<%= demand.time %>" name="time" id="currentTimeD" required>
+                       value="<%= demand.time %>" name="time" id="currentTimeD" readonly="readonly">
 
             </div>
-
-            <script>
-                var todayTimeD = new Date();
-                var timeStringD = todayTimeD.getHours() + ":" + todayTimeD.getMinutes() + ":" + todayTimeD.getSeconds();
-                document.getElementById("currentTimeD").value = timeStringD;
-
-            </script>
 
             <div class="form-group col-md-6">
                 <label for="businessNeed">Business Need</label>
@@ -82,46 +75,48 @@
 
             <div class="form-group col-md-6">
                 <label for="status_id">Status Id</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="status_id"
-                        value="<%= demand.status_id %>" name="status_id" required> name="status_id"required>
+                <input type ="text" name="status_id" list="statusName"
+                       value="<%= demand.status_id %>" required>
+                <datalist id="statusName">
                     <option value="1">New</option>
                     <option value="2">In progress</option>
                     <option value="3">Closed</option>
-                </select>
+                </datalist>
             </div>
+
 
             <div class="form-group col-md-6">
                 <label for="priority_id">Priority id</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="priority_id"
-                        value="<%= demand.priority_id %>" name="priority_id" required>
+                <input type ="text" name="priority_id" list="priorityName"
+                       value="<%= demand.priority_id %>" required>
+                <datalist id="priorityName">
                     <option value="1">High</option>
                     <option value="2">Medium</option>
                     <option value="3">Low</option>
-                </select>
+                </datalist>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="department_id">Department Id:</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="department_id"
-                        value="<%= demand.department_id %>" name="department_id" required>
+                <input type ="text" name="department_id" list="departmentName"
+                       value="<%= demand.department_id %>" required>
+                <datalist id="departmentName">
                     <option value="1">Business</option>
                     <option value="2">It</option>
                     <option value="3">Finance</option>
-                </select>
+                </datalist>
             </div>
 
-            <div class="container">
+        <!--    <div class="container">
                 <div class="row">
                     <div class="col-8">
                         <label for="comments"></label><textarea class="form-control form-control-lg mb-3" rows="3" name="comments" id="comments"
                                                                 value="<%= demand.comment %>" name="comment" required placeholder="Your comment...">
-
-
                     </textarea>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success"style=" background:rgba(34, 41, 49, 0.51)">Edit</button>
+            </div> -->
+            <button type="submit" class="btn btn-success"style=" background:rgba(34, 41, 49, 0.51)">Update</button>
 
         </div>
 

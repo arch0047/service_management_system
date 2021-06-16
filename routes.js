@@ -68,7 +68,8 @@ app.get('/adminHome',(req,res) => {
 app.get('/register', (req, res) => {
     if (req.session.loggedin) {
     res.render('addUser', {
-        title: 'Employee registeration'
+        title: 'Employee registeration',
+
     });
 } else {
     res.redirect("/adminHome");
@@ -154,7 +155,7 @@ app.get('/update/:employee_id',(req, res) => {
 app.post('/update',(req, res) => {
     const employee_id = req.body.employee_id;
     let sql = "update employees SET employeeName='"+req.body.employeeName+"',userId='"+req.body.userId+"', " +
-        "email='"+req.body.email+"' where employee_id ="+employee_id;
+        "email='"+req.body.email+"',department_id='"+req.body.department_id+"' where employee_id ="+employee_id;
 
     let query = connection.query(sql,(err, results) => {
         if(err) throw err;
@@ -290,7 +291,7 @@ app.get('/editInci/:incident_id',(req, res)=>{
     let query = connection.query(sql,(err,result)=>{
         if(err)throw err;
             res.render('updateIncident',{
-                title: 'Edit Incident',
+                title: 'Update Incident',
                 incident :result[0]
             });
     });
@@ -403,7 +404,7 @@ app.get('/edit/:demand_id',(req, res)=>{
     let query = connection.query(sql,(err,result)=>{
         if(err)throw err;
         res.render('updateDemand',{
-            title: 'Edit Demand',
+            title: 'Update Demand',
             demand :result[0]
         });
     });
@@ -412,8 +413,8 @@ app.get('/edit/:demand_id',(req, res)=>{
 app.post('/edit',(req, res) => {
     const demand_id = req.body.demand_id;
     let sql = "update demands SET demandTitle='"+req.body.demandTitle+"',requester='"+req.body.requester+"', "+
-        "department_id ='"+req.body.department_id+"',status_id='"+req.body.status_id+"', " +
-        "priority_id ='"+req.body.priority_id+"',date='"+req.body.date+"',time ='"+req.body.time+"'," +
+        "date='"+req.body.date+"',time ='"+req.body.time+"',status_id='"+req.body.status_id+"', " +
+        "priority_id ='"+req.body.priority_id+"',department_id ='"+req.body.department_id+"'," +
         "businessNeed ='"+req.body.businessNeed+"',presentSituation ='"+req.body.presentSituation+"'," +
         "benefits ='"+req.body.benefits+"' where demand_id ="+demand_id;
 
@@ -435,7 +436,7 @@ app.get('/demand_new',(req, res) => {
             });
         });
     } else {
-        res.send("<h1>Please choose again there was an error !</h1>");
+        res.send("<h1>Please go back there was an error !</h1>");
     }
 });
 
@@ -451,7 +452,7 @@ app.get('/demand_inProgress',(req, res) => {
             });
         });
     } else {
-        res.send("<h1>Please choose again there was an error !</h1>");
+        res.send("<h1>Please go back there was an error!</h1>");
     }
 });
 
@@ -467,7 +468,7 @@ app.get('/demand_closed',(req, res) => {
             });
         });
     } else {
-        res.send("<h1>Please choose again there was an error !</h1>");
+        res.send("<h1>Please go back there was an error !</h1>");
     }
 });
 

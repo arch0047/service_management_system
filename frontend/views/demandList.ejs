@@ -39,14 +39,15 @@
             <th>Demand id</th>
             <th>Demand Title</th>
             <th>Requester</th>
+            <th>Date</th>
+            <th>Time</th>
             <th>Business Need</th>
             <th>Present Situation</th>
             <th>Benefit</th>
-            <th>Date</th>
-            <th>Time</th>
             <th>Status id</th>
             <th>Priority id</th>
             <th>Department id</th>
+            <th>Action</th>
 
 
         </tr>
@@ -57,16 +58,16 @@
             <td><%=demand.demand_id %></td>
             <td><%=demand.demandTitle %></td>
             <td><%=demand.requester %></td>
+            <td><%=demand.date %></td>
+            <td><%=demand.time %></td>
             <td><%=demand.businessNeed %></td>
             <td><%=demand.presentSituation %></td>
             <td><%=demand.benefits %></td>
-            <td><%=demand.date %></td>
-            <td><%=demand.time %></td>
             <td><%=demand.status_id %></td>
             <td><%=demand.priority_id %></td>
             <td><%=demand.department_id %></td>
             <td>
-                <a href="edit/<%=demand.demand_id %>" class="btn btn-sm btn-success">Edit</a>
+                <a href="edit/<%=demand.demand_id %>" class="btn btn-sm btn-success">Update</a>
             </td>
         </tr>
         <% }); %>

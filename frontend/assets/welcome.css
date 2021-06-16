@@ -13,11 +13,13 @@ body {
     font-size: 16px;
     background: #b5c7db;
     background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_504303998_336734.jpg");
+    background-repeat: no-repeat;
+
 }
 h1{
     text-align:center;
-    text-decoration-color: white;
-    font-size: xxx-large;
+    font-size: 45px;
+    font-weight: bold;
 
 }
 div {
@@ -36,13 +38,14 @@ div {
 
 
 .dropdownbtn {
-    background-color:white;
+    background-color:lightgray;
     padding: 10px;
     font-size: 16px;
     border:solid black;
     cursor: pointer;
     position: absolute;
-
+    width:125px;
+    font-weight: bold;
 }
 .dropdown-content {
     display: none;
